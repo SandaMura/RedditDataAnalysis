@@ -36,27 +36,10 @@ Custom models trained per subreddit significantly outperformed global models.
 
 
 💡 Visualization Ideas We Can Do with Reddit Data (Inspired by the Paper)
-->Title Length vs. Upvotes
+->Cross Correlation of Subreddits over time
+example: the conspiracy and the Donald subreddit. Tie it to real life political events.
 
-Scatter or line plot showing how title length correlates with popularity across different subreddits.
+->Heatmap to see evolution of most popularReddits over time
 
-->Emotion vs. Popularity
 
-Use sentiment analysis (e.g., VADER) to plot sentiment polarity of titles vs. upvotes.
-
-->Topic Trends by Subreddit
-
-Apply topic modeling (LDA) and visualize common topics over time or subreddit (e.g., heatmap).
-
-->Title Readability
-
-Compute readability scores (e.g., Flesch-Kincaid) and plot them against post success.
-
-->Subreddit-Specific Word Clouds
-
-Generate word clouds of most successful vs. least successful post titles in each subreddit.
-
-->Predictive Modeling
-
-Train a simple model (e.g., logistic regression or random forest) to predict if a post will get more than X upvotes based on its title and subreddit.
 
