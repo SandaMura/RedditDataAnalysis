@@ -36,6 +36,7 @@ Custom models trained per subreddit significantly outperformed global models.
 
 
 💡 Visualization Ideas We Can Do with Reddit Data (Inspired by the Paper)
+
 ->Cross Correlation of Subreddits over time
 example: the conspiracy and the Donald subreddit. Tie it to real life political events.
 
