@@ -148,3 +148,4 @@ dmypy.json
 *_aug/
 
 # Repo specific files
+data/
