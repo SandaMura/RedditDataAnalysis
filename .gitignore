@@ -149,3 +149,5 @@ dmypy.json
 
 # Repo specific files
 data/
+proccessed/
+*.parquet
