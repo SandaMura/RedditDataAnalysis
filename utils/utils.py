@@ -1,16 +1,16 @@
+import gzip
+import io
+import itertools
+import zipfile
 from typing import Any, List
+
 import networkx as nx
 import numpy as np
-import itertools
-import io
-import zipfile
 import pandas as pd
 import requests
-import gzip
 from scipy.io import mmread
-from six.moves import urllib
 from scipy.sparse import coo_matrix
-from joblib import Parallel, delayed
+from six.moves import urllib
 
 
 def average_shortest_path_length_sampled(G: nx.Graph, n_samples: int = 500) -> float:
@@ -104,14 +104,15 @@ def average_clustering(G: nx.Graph) -> float:
     return np.mean(list(nx.clustering(G).values()))
 
 
-def print_stats(G: nx.Graph, n_samples=500):
+def print_stats(G: nx.Graph, n_samples=500, directed=False):
     """Prints statistics about the graph."""
     print(f"{G.number_of_nodes() = :}")
     print(f"{G.number_of_edges() = }")
     print(f"{average_degree(G) = :.2f}")
     print(f"{average_clustering(G) = :.4f}")
-    print(f"{connectivity_perc(G) = :.2f}")
-    print(f"{average_shortest_path_length_sampled(G, n_samples) = }")
+    if not directed:
+        print(f"{connectivity_perc(G) = :.2f}")
+        print(f"{average_shortest_path_length_sampled(G, n_samples) = }")
 
 
 # Helper functions
@@ -198,7 +199,9 @@ def load_graph(name: str) -> nx.Graph:
         download_url = "https://nrvis.com/download/data/power/power-US-Grid.zip"
         res = requests.get(download_url)  # Download
         zf = zipfile.ZipFile(io.BytesIO(res.content))  # zipfile from downloaded content
-        G = nx.from_scipy_sparse_array(mmread(zf.open("power-US-Grid.mtx")))  # open the file pointer and mmread.
+        G = nx.from_scipy_sparse_array(
+            mmread(zf.open("power-US-Grid.mtx"))
+        )  # open the file pointer and mmread.
         node_map = {u: int(u) for u in G.nodes}
         G = nx.relabel_nodes(G, node_map, copy=True)
 
@@ -246,7 +249,9 @@ class GraphReader(object):
         """
         Reading bytes as a Pandas dataframe.
         """
-        tab = pd.read_csv(io.BytesIO(bytes), encoding="utf8", sep=",", dtype={"switch": np.int32})
+        tab = pd.read_csv(
+            io.BytesIO(bytes), encoding="utf8", sep=",", dtype={"switch": np.int32}
+        )
         return tab
 
     def _dataset_reader(self, end):
@@ -310,7 +315,9 @@ def walk_node(graph: nx.Graph, node: Any, walk_length: int) -> List[Any]:
     return walk
 
 
-def walk_graph(graph: nx.Graph, walks_per_node: int, walk_length: int) -> List[List[Any]]:
+def walk_graph(
+    graph: nx.Graph, walks_per_node: int, walk_length: int
+) -> List[List[Any]]:
     """Given a graph, how many walks_per_node and the walk_length, for each node do
     walks_per_node walks of length walk_length starting from it. Add the walk to a list
     and return it"""
