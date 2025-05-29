@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-1262834661120f13017cb42fb3917d02"}, "mark": {"type": "line", "point": true, "strokeWidth": 3}, "encoding": {"tooltip": [{"field": "first_year", "type": "quantitative"}, {"field": "median_lg", "title": "Median (log10 h)", "type": "quantitative"}], "x": {"field": "first_year", "type": "ordinal"}, "y": {"axis": {"format": "~s"}, "field": "median_lg", "scale": {"type": "linear"}, "type": "quantitative"}}, "height": 400, "title": "Attention span shrinks 2008 \u2192 2013", "width": 550, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-1262834661120f13017cb42fb3917d02": [{"first_year": 2008, "median_lg": 3.069123202921009}, {"first_year": 2009, "median_lg": 2.8956991940334813}, {"first_year": 2010, "median_lg": 2.734872122720857}, {"first_year": 2011, "median_lg": 2.6316160861602826}, {"first_year": 2012, "median_lg": 1.8233800276254744}, {"first_year": 2013, "median_lg": 0.6705035487334402}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
